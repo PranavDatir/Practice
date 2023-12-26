@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Registering bean of type HelloService with some ID: myBean -->
+	<bean id="myBean" class="day1.Hello"/>
+	<bean id="myBean2" class="day1.Hello"/>
+	<bean id="myBean3" class="day1.UserService"/>
+	
+	<bean id="myBean4" class="day1.UserService" scope="prototype" />
+	
+	<bean id="myBean5" class="day1.UserGreetingServices">
+	<property name="userName" value="Pranav"></property>
+	<property name="greetingMessage" value="GoodMorning"></property>
+	<property name="userAge" value="23"></property>
+    </bean>
+    
+    <bean id="myBean6" class="day1.UserGreetingServices">
+	<constructor-arg value="Pranav"></constructor-arg>
+	<constructor-arg value="GoodMorning"></constructor-arg>
+	<constructor-arg value="23"></constructor-arg>
+    </bean>
+    
+</beans>

@@ -1,0 +1,75 @@
+package dac;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class InfoDao implements DaoInterface<Info, Integer> {
+
+	@Override
+	public Collection<Info> getAll() {
+		String sqlQuery = "select * from demo";
+		Collection<Info> allInfo = new ArrayList<Info>();
+		try {
+			Connection con = JdbcUtils.buildConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sqlQuery);
+			while(rs.next()) {
+				String id = rs.getString(1);
+				String name = rs.getString(2);
+				int phone = rs.getInt(3);
+				
+				Info currentInfo = new Info(id, name, phone);
+				allInfo.add(currentInfo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allInfo;
+	}
+
+	public Info getOne(Integer id) {
+		Info foundInfo = null;
+		try {
+			Connection con = JdbcUtils.buildConnection();
+			String sqlQuery = "select * from demo where id=?";
+			PreparedStatement ps = con.prepareStatement(sqlQuery);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				String d_id = rs.getString(1);
+				String name = rs.getString(2);
+				int phone = rs.getInt(3);
+				foundInfo = new Info(d_id, name, phone);
+						
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return foundInfo;
+	}
+
+	@Override
+	public void create(Info t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Info t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Integer key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

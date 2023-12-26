@@ -1,0 +1,4 @@
+127.0.0.1 - - [08/Dec/2023:15:07:14 +0530] "GET / HTTP/1.1" 404 1073
+0:0:0:0:0:0:0:1 - - [08/Dec/2023:15:07:15 +0530] "GET /SpringMVCProject/WEB-INF/classes/day9/SpringMvcWebApplicationInitializer.java HTTP/1.1" 404 1046
+0:0:0:0:0:0:0:1 - - [08/Dec/2023:15:07:15 +0530] "GET /favicon.ico HTTP/1.1" 404 1084
+0:0:0:0:0:0:0:1 - - [08/Dec/2023:15:07:33 +0530] "GET /SpringMVCProject/showIndex HTTP/1.1" 200 70

@@ -1,0 +1,47 @@
+package day2;
+
+import java.util.Collection;
+
+public class CRUD_Main {
+
+	public static void showOneRestaurant() {
+		DaoInterface<Restaurant, Integer> idao = new RestaurantDao();
+		Restaurant rst = idao.getOne(1);
+		if(rst != null)
+			System.out.println(rst);
+		else
+			System.out.println("Restaurant with this ID does not exist");
+	}
+	private static void showAllRestaurant() {
+		DaoInterface<Restaurant, Integer> idao = new RestaurantDao();
+		Collection<Restaurant> allAvailableRestaurants = idao.getAll();
+		for(Restaurant rst : allAvailableRestaurants)
+			System.out.println(rst);
+		}
+	private static void createRestaurant() {
+		DaoInterface<Restaurant, Integer> idao = new RestaurantDao();
+		Restaurant rst = new Restaurant(2,"Starbucks","Coffee",25);
+		idao.create(rst);
+	}
+	private static void deleteRestaurant() {
+		DaoInterface<Restaurant, Integer> idao = new RestaurantDao();
+		idao.deleteOne(2);
+	}
+	private static void updateRestaurant() {
+		DaoInterface<Restaurant, Integer> idao = new RestaurantDao();
+		Restaurant currentRestaurant = idao.getOne(3);
+		currentRestaurant.setCuisine("Indian");
+		currentRestaurant.setName("Taj");
+		idao.update(currentRestaurant);
+		
+	}
+	public static void main(String[] args) {
+		//showOneRestaurant();
+		//showAllRestaurant();
+		//createRestaurant();
+		//deleteRestaurant();
+		updateRestaurant();
+	}
+	
+
+}

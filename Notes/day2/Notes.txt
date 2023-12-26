@@ -1,0 +1,179 @@
+JRE -> Java Runtime Environment
+
+It is a runtime environment required to execute Java programs.
+
+It has mainly 3 constituents:
+	1. Class Loader - Loads the .class files into memory
+	2. Byte Code Verifier - 
+			What is Byte Code?
+				It is a highly optimized set of instructions for further execution.
+				It is platform neutral and therefore Java is platform independent.
+				
+			Byte Code Verifier checks the consistency and validity of the code.
+	3. JVM -> Java Virtual Machine
+				It acts as an interpreter.
+				It converts the byte code (Platform Neutral) into platform specific code.
+				It is highly platform dependent.
+				
+-----------------------------------------------------------------------------
+
+Method Overloading:
+	It involves methods with same name but different signatures.
+	
+	Signatures are considered to be different when one of the following is satisfied:
+		1. Number of parameters is different
+		2. Type of parameters is different
+		3. Sequence is different
+		
+	It is useful to achieve polymorphism.
+	If there is no matching signature method found, compiler generates an error.
+	Therefore Method Overloading is considered as Static (Compile Time) Polymorphism.
+	
+	
+	Constructor:
+		Unlike C and C++, Java does not go for Garbage Values; rather it goes for DEFAULT values..
+		The default value depends upon the type of the variable.
+		
+		E.g.
+			Integers 			-> 			0
+			Fractions 		->			0.0
+			char					->			'\u0000'
+			boolean			->			false
+			
+			Object 			->			null
+			Reference
+			
+			To avoid default values for a class object, Java provides a special member called as Constructor.
+			
+			Why Constructor is special?
+				It has same name as that of class name.
+				It gets called implicitly as soon as object is created.
+				It does not have any return type, not even 'void'.
+				
+				*** Like methods, constructors can be overloaded.
+				
+				Constructor without parameter is called as No-Argument (Sometimes DEFAULT) constructor
+				and constructor with parameter is called as Parameterized constructor.
+				
+	Understanding 'this':
+		Every class member method or a constructor gets a hidden parameter by default, known as 'this'.
+		It is a reference that refers to the current object.
+		
+		When to use 'this' explicitly?
+		When the variable names conflict, local variable get the highest priority. To resolve the scope. 'this' is 
+		to be used explicitly.
+		
+		----------------------------------------------------------------------------------------------------
+		
+		Case Study: Course Management System
+		
+		CMS is dealing with Online courses offered by various platforms e.g. Udemy, Coursera, Edureka and so on.
+		
+		It mainly involves an entity: Course which handles following information:
+			1. Course ID (Number without Decimal)
+			2. Title (Character Based)
+			3. Duration (Hrs) (Number without Decimal)
+			4. Provider (E.g. Udemy, Coursera, Edureka) (Character Based) 
+			5. Fees (Number without Decimal)
+			
+	   TODO 1 :
+	   		Create an entity class for handling course related information with attributes, getters, setters, constructors
+	   		and test its functionality
+	   		
+	   	Naming Conventions:
+	   		1. Class names should be in TitleCase
+	   		2. Variable names should be in camelCase
+	   		3. Method names should be in camelCase
+	   		4. Package names should be in lowercase
+	   		
+	  ------------------------------------------------------------------------------------------------------------
+	  
+	  Static Members:
+	  	Whatever declarations, definitions have been made within a class; they are called as members of a class.
+	  	
+	  	E.g. variables, methods, constructors and so on.
+	  	
+	  	Members are of 2 types:
+	  		1. Non-Static
+	  			These are the characteristics associated with a particular object or an instance.
+	  		2. Static
+	  			These are the characteristics which are not associated with any particular object or an instance;
+	  			rather they are associated with the whole class..
+	  			
+	  			To accomplish this, Java provides 'static' modifier.
+	  			It can be used in case of variables and methods.
+	  			**** Constructors cannot be declared 'static'
+	  			
+	  			Static Variables:
+	  				When a variable is declared as 'static', only single copy is created for the whole class irrespective
+	  				of the number of objects.
+	  				
+	  				If the variable is accessible from outside the class (Not declared as 'private'), ideally it is accessed
+	  				using ClassName.variableName format.
+	  				
+	  				However it can be accessed using object reference name as well but it is not a standard practice.
+	  			
+	  			Static Methods:
+	  				Like variables, methods can also be declared as 'static'.
+	  				Such methods are accessible using ClassName.methodName() format.
+	  				
+	  				However they can be accessed using object reference name as well but it is not a standard practice.
+	  				
+	  				Restrictions:
+	  					1. Cannot access Non-Static members.
+	  					2. Cannot make use of 'this'
+	  					
+	  			More about 'static':
+	  				1. 'static' can be used to create Global variables in Java.
+	  				2. It can be used to create arbitrary block of code to handle any logic at the time of class loading.
+	  					It can be used to initialize 'static' variables.
+	  					
+	  	TODO 2:
+	  			Enhance CMS as per the following:
+	  			
+	  			Implement a functionality that maintains the count of courses  and displays the same appropriately
+	  			as and when requested.
+	 
+	  				
+	  				
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+			
+			
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+
+
+
+
+		

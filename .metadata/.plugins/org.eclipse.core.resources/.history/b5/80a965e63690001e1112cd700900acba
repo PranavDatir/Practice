@@ -1,0 +1,107 @@
+package day2;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class RestaurantDao implements DaoInterface<Restaurant, Integer> {
+	@Override
+	public Collection<Restaurant> getAll(){
+		String sqlQuery = "select * from restaurant";
+		Collection<Restaurant> allRestaurants = new ArrayList<>();
+		try (
+			Connection cn = JdbcUtils.buildConnection();
+			Statement stmt = cn.createStatement();
+			ResultSet rs = stmt.executeQuery(sqlQuery);
+		){
+			while(rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2);
+				String cuisine = rs.getString(3);
+				int branches = rs.getInt(4);
+				
+				Restaurant currentRestaurant = new Restaurant(id, name, cuisine, branches);
+				allRestaurants.add(currentRestaurant);
+			}
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		 
+		return allRestaurants;
+		
+	}
+	@Override
+	public Restaurant getOne(Integer id) {
+		Restaurant foundRestaurant = null;
+		try(
+			Connection cn = JdbcUtils.buildConnection();
+			){
+			String sqlQuery = "select * from restaurant";
+			PreparedStatement pstmt = cn.prepareStatement(sqlQuery);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int r_id = rs.getInt(1);
+				String name = rs.getString(2);
+				String cuisine = rs.getString(3);
+				int branches = rs.getInt(4);
+				
+				foundRestaurant = new Restaurant(id, name, cuisine, branches);
+			}
+		}
+		catch(Exception ex) {
+			//ex.printStackTrace();
+		}
+		return foundRestaurant;
+	}
+	@Override
+	public void create(Restaurant newRestaurant) {
+		String sqlQuery = "Insert into Restaurant(id, name, cuisine, branches) values(?,?,?,?)";
+		try(
+			Connection cn = JdbcUtils.buildConnection();
+			PreparedStatement pstmt = cn.prepareStatement(sqlQuery);
+			){
+			//Extracting the values from the incoming Restaurant object
+			int id = newRestaurant.getId();
+			String name = newRestaurant.getName();
+			String cuisine = newRestaurant.getCuisine();
+			int branches = newRestaurant.getBranches();
+			//Substituting the values for unknown parameters
+			pstmt.setInt(1, id);
+			pstmt.setString(2, name);
+			pstmt.setString(3, cuisine);
+			pstmt.setInt(4, branches);
+			
+			int count = pstmt.executeUpdate();
+			System.out.println(count + " record inserted");
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+	@Override
+	public void deleteOne(Integer id) {
+		String sqlQuery = "delete from restaurant where id = ?";
+		try(
+			Connection cn = JdbcUtils.buildConnection();
+			PreparedStatement pstmt = cn.prepareStatement(sqlQuery);	
+			){
+			pstmt.setInt(1, id);
+			int count = pstmt.executeUpdate();
+			System.out.println(count + " record deleted");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+}

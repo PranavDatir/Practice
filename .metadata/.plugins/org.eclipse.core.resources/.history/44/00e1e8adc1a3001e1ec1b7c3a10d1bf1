@@ -1,0 +1,8 @@
+package jdbcinsert;
+
+public class InsertDemo {
+	public static void main(String[] args) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.driver");
+		System.out.println("driver class loaded");
+	}
+}

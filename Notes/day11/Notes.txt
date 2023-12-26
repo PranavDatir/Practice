@@ -1,0 +1,178 @@
+Java Language Essentials:
+	These are certain concepts which are important from Java development perspective. Some of these concepts 
+	are frequently used by other Java based technologies.
+	
+	1. Annotations
+	2. Enums
+	3. Java Reflection
+	4. Lambda Expressions
+	5. Date and Time API
+	6. Stream API
+	
+	Annotations:
+		It is a feature introduced by Java 5.
+		In many Java based applications, annotations are frequently used to handle metadata.
+		Prior to annotations, applications were making use of XML which was time consuming.
+		Annotations are used to develop applications rapidly. (RAD)
+		
+		Annotations mainly have to properties:
+			1. Target
+			2. Retention Policy 
+			
+		Target:
+			It indicates the possible location where an annotation can be applied.
+			E.g. Type, Method, Field etc.
+		
+		Retention Policy:
+			It indicates till what moment the annotation will create its impact.
+			E.g. Source, Class, Runtime 	
+			
+	Enums:
+		Whenever there is a need to declare some property holding a value which is one of the several possible values,
+		then Java 5 specific Enum feature is used.
+		
+		Enums are declared using 'enum' keyword. 
+		
+		Like classes and interfaces, enum type references can also be tested for equality using 'equals()' method.
+	
+	Java Reflection:
+		Sometimes there is a requirement to create an object of the class where the name of the class is to be decided
+		at runtime.
+		
+		The 'new' operator can be used to create an object only when the class name is predetermined.
+		
+		This is made possible using Java's Reflection API.
+		
+		At the core, it provides a class called as 'Class' from java.lang package.
+		It provides a static method called as 'forName()' that is used to load the class explicitly.
+		In order to create the object, it provides 'newInstance()' method.
+		
+		Reflection can also be to used to obtain information about the specific class.
+		E.g.
+			The methods, constructors, fields defined within that class.
+			
+			This is possible using the API that belongs to sub-package: java.lang.reflect
+			
+			It provides several classes to handle these operations.
+			
+			E.g.
+				Method
+				Constructor
+				Field
+				
+	Lambda Expressions:
+		It is a feature introduced by Java 8.
+		It is mainly used for interfaces which are Functional Interfaces.
+		
+		What is a Functional Interface?
+			Any interface that has one and only one abstract method, then that interface is called as Functional Interface.
+			
+			E.g.
+				'Runnable' is a Functional Interface because it provides a single 'abstract' method: run()
+				
+				It is possible to verify that the interface is a Functional Interface programmatically using
+				@FunctionalInterface annotation. It is to be applied at the interface level. 
+				
+			Once a Functional Interface is created, it can be further used by 3 ways:
+				1. Creating a separate class which implements this interface
+				2. Creating an anonymous inner class for this interface.
+				3. By using Lambda Expression
+				
+			Lambda expression can be used only in case of Functional Interfaces because it results into anonymous 
+			method.
+			
+			Lambda Expression is mainly divided into 2 parts:
+				1. Lambda Parameters
+				2. Lambda Body
+			
+			Lambda Parameters and Lambda Body are separated using Lambda Operator which is denoted by '->'
+			
+			E.g.
+				[Lambda Parameters] -> [Lambda Body]
+				
+			The lambda body is of 2 types:
+				1. Single Expression
+				2. Blocked Lambda
+				
+			When the implementation contains one single statement, it is done using Single Expression whereas when
+			the implementation contains multiple statements, it must be done using Blocked Lambda which is denoted
+			by '{ }'
+			
+			Lambda Expression for methods returning values:
+				When a Lambda Expression is defined for the Functional Interface having a method that returns a value, 
+				in case of Single Expression Lambda, 'return' keyword must not be used.
+				
+				Whereas in case of Block Lambda, it must be used.
+				
+			Lambda Expression for methods accepting values:
+				When a Lambda Expression is written for a Functional Interface having a method that accepts parameters,
+				the type of the parameter used in the expression is inferred automatically and therefore, there is no need
+				to explicitly specify the type.
+				
+				However, it is also possible to specify the type explicitly. In this case, specifying the type partially is not
+				allowed. It is to be specified for all parameters
+				
+				****If the method accepts single parameter, then the use of '( )' is optional.
+				
+				E.g.
+					interface Test {
+						void doTest(int x);
+					}
+					
+					For the above interface, Lambda Expression can be written as per the following:
+						Test t1 = (a) -> //Some Code
+						Test t2 = a -> //Some Code
+						
+		Date and Time API
+			Since Java 8, there is a separate API provided to work upon Date and Time. 
+			The earlier Date and Time related functionalities had a lot of drawbacks and therefore Java 8 introduced
+			this API which belongs to java.time package.
+			
+			At the core, it provides 3 classes:
+				1. LocalDate
+				2. LocalTime
+				3. LocalDateTime
+				
+		Stream API
+			Since Java 8, there is a separate API provided to work upon Collections. It is known as Stream API.
+			It allows to perform different types of operations on the data held inside collections
+			E.g.
+				1. Regular Traversal
+				2. Filtering
+				3. Mapping
+				4. Reducing
+				5. Sorting
+				
+			This is made possible by using several predefined Functional Interfaces. This allows to make use of
+			Lambda Expressions.
+			
+			In order to use Stream API, first it is necessary to obtain the stream on the top of underlying collection.
+			This is possible by using 'stream()' method.
+			
+			The populated stream is stored within an object of type : java.util.stream.Stream interface
+			It can be used further to perform relevant operations.
+				
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

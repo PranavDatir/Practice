@@ -1,0 +1,173 @@
+String and StringBuilder:
+	String:
+		Like array, String is a First Class (Can be instantiated without 'new') object.
+		
+		int arr[] = new int[5];
+		int arr2[] = {1,2,3}; //Instantiated without 'new'
+		
+		String message = "Hello";//Instantiated without 'new'
+		String message2 = new String("Welcome");
+		
+		String objects are immutable.
+		Any attempt to modify its contents, results into new object creation. This leads to performance implications
+		as a lot of object being created while performing String manipulation.
+		
+		To address this, Java provides a class: StringBuilder.
+		It follows mutable sequence of characters.
+		It provides several overloaded 'append()' methods to handle the manipulation. 
+
+-----------------------------------------------------------------------------------------------------------
+
+Interface:
+	Interface is a collection of 'abstract' methods and possibly 'final' variables.
+	Used to provide method declarations and implementation is not available.
+	
+	Declaring an Interface:
+		An Interface is declared using 'interface' keyword.
+		
+		E.g.
+			interface MyInterface {
+				void myMethod();
+			}
+		In the above code fragment, interface 'MyInterface' declares one abstract method 'myMethod()' however
+		the 'abstract' modifier is optional.
+		
+		The variables declared within an interface are implicitly 'final' as well as 'static' and therefore the use of
+		'final' and 'static' modifiers is 	optional.
+		
+		Like abstract class, an interface cannot be instantiated.
+		It is further used by creating a class which implements that interface. This is achieved using 'implements'
+		keyword.
+		
+		E.g.
+			interface MyInterface {
+				void myMethod();
+			}
+			
+			class MyClass implements MyInterface {
+				void myMethod(){
+				
+				}
+			}
+			In the above fragment, class 'MyClass' is implementing an interface 'MyInterface' and defining the method:
+			'myMethod()'
+		
+			Like abstract class, it is possible to declare a reference of interface type as well.
+			That reference can refer to an object of a class which implements the relevant interface.
+			
+			E.g.
+			MyInterface mi = new MyClass();
+			
+			In the above fragment, reference 'mi' of type 'MyInterface' refers to an object of class 'MyClass' because
+			MyClass implements MyInterface.
+			
+			Why Interface?
+				Interfaces are required mainly to achieve 2 things:
+					1. Expanding the scope of polymorphism
+						When polymorhism is restricted to a single hierarchy, it is done using an Abstract class but when it
+						is to be used across multiple hierarchies, Interface is used.
+						 
+					2. Achieving multiple inheritance in terms of behaviours.
+						A class can extend only one class but can implement multiple interfaces.
+						
+						E.g.
+						class Employee implements Calculator, Processor
+						
+						An interface can extend multiple interfaces.
+						E.g.
+						interface GrossCalculator extends Calculator, Processor
+						
+					Possible Combinations:
+						1. Class extends Class
+						2. Class implements Interface(s)
+						3. Interface extends Interface(s)
+					
+					Interface Rules / Concepts:
+					1. If an interface is declared as 'public', its methods are by default 'public' and 'abstract'.
+						E.g.
+							public interface MyInterface {
+								void myMethod();
+								//This is processed as public abstract void myMethod();
+							} 
+					
+					2. If an interface is declared as 'public', its variables are by default 'public', 'static' and 'final'
+						E.g.
+							public interface MyInterface {
+								int myVar = 10;
+								//This is processed as public static final int myVar = 10;
+							}	
+					
+					3. If a class implements an interface, it must implement all the methods from that interface otherwise
+						it must be declared 'abstract'.
+						
+					4. A method or a constructor can accept a parameter of an interface type. This kind of design brings
+						loose coupling.
+						
+			Difference between Abstract Class and Interface
+			
+				Abstract Class 													Vs 														Interface
+			
+			Used to achieve polymorphism																	Used to achieve polymorphism
+			within a single hierarchy																				across multiple hierarchies
+			
+			A class can inherit only one abstract class										A class can implement multiple interfaces
+			
+			It can have concrete methods.															Generally contains only abstract methods
+																														Since Java 8, it is possible to define
+																														methods provided they are 'default'
+																														or 'static'	
+																														
+		TODO 5:
+			Create a class CourseInfo with following attributes:
+				providerName (Character Based)
+				duration (Numeric without decimal)
+			
+			Add getters, setters, constructors and so on.
+			
+			Create an interface CourseInfoProcessor with following method:	
+					float processCourseInfo(Course [ ], CourseInfo);
+			
+			Create 2 implementation classes of CourseInfoProcessor (Name is of your choice).
+			
+			These classes must perform as per the following:
+			
+			Class 1:
+				Returns the total count of courses of which the information matches with CourseInfo object.
+			
+			Class 2:
+				Returns the average fees of courses of which the information matches with CourseInfo object.
+			
+			(Hint: make use of 'equals()')
+			
+			E.g.
+			Course Array:
+			[
+				{101, Core Java", "Udemy", 100, 5500},
+				{102, Adv Java", "Udemy", 100, 8500},
+				{103, Angular", "Edureka", 60, 7500},
+				{104, Angular", "Coursera", 75, 8000},
+				{105, Spring", "Udemy", 40, 10500}
+			]
+			
+			CourseInfo { Udemy, 100 }
+			
+			Expected Output from Class 1: 2
+			Expected Output from Class 2: Avg of 5500 and 8500
+						
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

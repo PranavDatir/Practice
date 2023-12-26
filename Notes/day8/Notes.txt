@@ -1,0 +1,227 @@
+IO and File Handling:
+	Every business application requires some input and delivers some output.
+	It means, the application has to read the data and write the data.
+	To read the data, some source is required and to write the data, some destination is required.
+	
+	Data can be read from several possible sources.
+	E.g.
+		Input Device (Keyboard)
+		File
+		Socket
+	
+	Data can be written to several possible destinations.
+	E.g.
+		Output Device (Console, Printer)
+		File
+		Socket
+	
+	In IO programming, there are mainly 2 operations involved:
+		READ and WRITE
+	
+	To perform either READ or WRITE operation, some connector is required.
+	That connector is called as Stream.
+
+	Stream is something through which data flows.
+	Since there are 2 operations involved, READ and WRITE, streams are divided into 2 types:
+		1. InputStream
+		2. OutputStream
+	
+	InputStream depicts the flow of bytes from Source towards program's memory.
+	OutputStream depicts the flow of bytes from program's memory towards destination.
+	
+	To handle these things, Java provides 2 classes:
+		InputStream and OutputStream
+	
+	Both these classes are 'abstract' classes	and the entire IO specific library belongs to java.io package.	
+	These abstract classes are inherited by several sub-classes and these sub-classes are used to accomplish
+	several IO specific operations.
+	
+	E.g.
+		FileInputStream is a sub-class of InputStream and it is used to READ the data from File.
+		FileOutputStream is a sub-class of OutputStream and it is used to WRITE the data into File.
+		
+		When FileInputStream is instantiated, its cursor position by default starts pointing to the Beginning of File
+		(BOF) position.
+		
+		To read the contents, 'read()' method is used.
+		The method returns the character value and shifts the cursor 1 step ahead.
+		If End of File (EOF) position is encountered, the method returns -1. 
+		
+		In IO programming, when any resource is  opened, when its task is over, ideally it is to be closed.
+		If the resource is not closed, whatever other resources have been opened for that main resource at the system
+		level, they will remain open, unnecessarily consuming more memory. This leads to performance implications..
+		Therefore closing the resources is important.
+		
+		Typically, the resource goes through 3 phases:
+			1. OPEN
+			2. USE
+			3. CLOSE
+		
+		Like regular Java objects where they are implicitly destroyed by Garbage Collector, there is a provision about
+		these IO specific resources which implicitly closes them. 
+		
+		This is possible by using a special construct: try-with-resources.
+		It is feature introduced by Java Version 7.
+		
+		Java 7 introduced an interface known as AutoCloseable.
+		Any class which implements AutoCloseable, can be used as a resource along with try-with-resources construct.
+		
+		The try-with-resources syntax is as per the following:
+			try ( <Resource Declarations>) {
+			
+			}
+			catch(...){
+			
+			}
+		
+		Writing contents into the file:
+			When writing contents into the file, it is not necessary that the file is present.
+			If it is not present, it will get created.
+		
+			In order to write the contents, 'write()' method is used. The method accepts data in the form of byte array.
+			Therefore, if the original data is in String format, it needs to be converted into byte array.
+			This is possible by using 'getBytes()' method of String class.
+		
+			In WRITE operation, the file gets created if it is not present otherwise it gets overwritten.
+			In order to avoid overwriting the contents, the file needs to be opened in APPEND mode.
+			This is done by using overloaded constructor of FileOutputStream class.
+			
+			E.g.
+				FileOutputStream(String filePath, boolean Append)
+				
+		TODO 7:
+			Create a file course_info.txt and add some information into it.
+			Write a main program that accepts 2 command line arguments indicating the source file name and
+			the destination file name and the program must copy the contents of source file into destination file.
+			
+			Display appropriate message if the source file with the given name is not available.
+			
+			Implement this using standard practices.
+			(Hint: Make use of StringBuilder)
+		
+		--------------------------------------------------------------------------------------------------------------
+			Exploring java.io
+			java.io package provides wide range of classes and interfaces which are meant for performing IO specific 
+			operations.
+			
+			E.g.
+				InputStream and OutputString						--> Abstract Base Classes
+				FileInputStream and FileOutputStream		--> Concrete Derived Classes 
+				
+			Other Classes:
+				FilterInputStream - 
+					It is a sub-class of InputStream and it is used convert raw bytes of an information to the desired form.
+					
+				It is to be used through its sub-classes because its constructor is declared as 'protected'
+				
+				FilterInputStream sub-classes:
+					1. LineNumberInputStream
+						It is used to work upon line numbers.
+					2. SequenceInputStream
+						It is used to process multiple files one after the other.
+						These files are arranged in a sequence so that there is only 1 EOF position to be checke.d
+					3. BufferedInputStream
+							When 'read()' method is invoked using FileInputStream, every invocation requires a call to
+							Hard Disk.
+							When the number of such calls goes on increasing, it results into performance implications.
+							To optimize the performance, a buffering model is required which is given by BufferedInputStream.
+							BufferedInputStream maintains the data into some buffer and when all the characters are read
+							from that buffer, it gets refilled with next chunk of characters.
+					4. DataInputStream
+						It is used to read Java's primitive data types.
+						It provides relevant readXXX() methods.
+						E.g.
+							readInt()
+							readFloat()
+							readDouble()
+		
+		Other Utility classes in IO:
+			Java provides several classes which are useful in order to handle IO operations.
+			
+			E.g.
+				1. File
+				2. RandomAccessFile
+			
+			Generally, IO specific classes are the extensions to either InputStream of OutputStream; but classes like
+			'File' and 'RandomAccessFile' do not fall under any InputStream or OutputStream.
+			
+			In fact they are directly inherited from the topmost class: java.lang.Object
+			
+			File Class:
+				Used to handle file system related operations.
+				It provides several utility methods:
+				E.g.
+					1. exists()
+					2. mkDir()
+					3. createNewFile()
+					4. delete()
+					5. length()	
+					
+			RandomAccessFile Class:
+				It allows to place the file pointer (cursor) anywhere, resulting into random access.
+				It provides a utility method: seek() using which a pointer can be placed at any position.
+				
+				It can be used to handle both the operations: READ and WRITE
+				
+	Categories of Streams:
+		Streams are divided into 2 categories:
+			1. Byte Streams
+			2. Character Streams
+			
+		Byte Streams work upon 8-bit data.
+		They are expressed using abstract base classes: InputStream and OutputStream
+		They are further used through their sub-classes: FileInputStream and FileOutputStream
+		
+		Since Java is meant for internationalization, to support the same, one more category is provided by IO library
+		which is known as Character Streams.
+		They work upon 16-bit data.
+		They are expressed using abstract base classes: Reader and Writer
+		They are further used through their sub-classes: FileReader and FileWriter
+		
+		Like byte streams, character streams are widely provided by Java.
+		
+		The most frequently used character stream is BufferedReader.
+		It is used to optimize the performance as it applies buffering model.	
+		It provides a utility method: readLine() that allows to read the contents line by line.	
+		
+	TODO 8:
+		Create a file course_data.txt and fill the information into that file as per the format given below:
+		<ID>:<Title>:<Provier>:<Duration>:<Fees>
+		
+		E.g.
+		101:Core Java:Udemy:50:5500
+		
+		Write a program that reads the data from this file line by line, converts that data available in that line into
+		Course object and directly prints that object.
+	
+	Accepting User Input:
+		To accept input from user, it is necessary to open the InputStream that is specific to the input device which is
+		keyboard.
+		
+		This is made possible by a class: System from java.lang package.
+		
+		It mainly provides 2 public static final variables:
+			1. 'out'
+			2. 'in'
+		
+		'out' : It is declared of type java.io.PrintStream which refers to the console.
+		'in': It is declared of type java.io.InputStream which refers to the keyboard input. 
+		
+		Earlier, to accept user input, BufferedReader was frequently used because it provides a method: readLine()
+		However, to get the values in the desired form, it was necessary to convert the strings into the respective
+		primitive type using wrapper classes.
+		
+		This is simplified by using a Scanner class which belongs to java.util package. It avoids writing the code
+		for type conversion because it provides several nextXXX() methods.
+		
+		E.g.
+			nextInt()
+			nextFloat()
+		
+		
+		
+		
+		
+		
+		
+		

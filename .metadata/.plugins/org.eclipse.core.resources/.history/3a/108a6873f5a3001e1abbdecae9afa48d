@@ -1,0 +1,59 @@
+package dac;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class InfoDao implements DaoInterface<Info, Integer> {
+
+	@Override
+	public Collection<Info> getAll() {
+		String sqlQuery = "select * from demo";
+		Collection<Info> allInfo = new ArrayList<Info>();
+		try {
+			Connection con = JdbcUtils.buildConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sqlQuery);
+			while(rs.next()) {
+				String id = rs.getString(1);
+				String name = rs.getString(2);
+				int phone = rs.getInt(3);
+				
+				Info currentInfo = new Info(id, name, phone);
+				allInfo.add(currentInfo);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return allInfo;
+	}
+
+	@Override
+	public Info getOne() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void create(Info t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Info t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Integer key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

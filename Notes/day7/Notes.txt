@@ -1,0 +1,166 @@
+Multithreading:
+	What is Multitasking?
+		It involves executing multiple tasks simultaneously.
+		It is of 2 types:
+			1. Multiprocessing
+			2. Multithreading
+		
+		Multiprocessing:
+			It involves executing multiple processes simultaneousl.y.
+			
+			Program is a set of instructions and every running instance of a program is known as Process.
+			Operating System (OS) implements Multitasking via Multiprocessing.
+			It allows to execute multiple processes (applications) simultaneously.
+			It implements context switching algorithm. 
+			Every process runs in its own address space and therefore the entire context including variables, global
+			variables, objects and so on is stored separately.
+			Due to this, there is no sharing of data.
+		
+		Multithreading:
+			It involves executing multiple threads simultaneousl.y.
+			
+			Thread is an entity within a process. It defines the path of execution.
+			Java implements Multitasking via Multithreading by taking it one level lower.
+			Since multiple threads live within the same process, entire context including variables, global
+			variables, objects may get shared by these threads.
+			
+			Multiprocessing 												Vs 												Multithreading
+			
+			Process is the smallest unit of work													Thread is the smallest unit of work that lives 
+																														within a process
+																														
+			It takes more overhead to launch a process										It takes less overhead to launch a thread
+			
+			Inter-Process communication is a hevayweight activity						Inter-Thread communication is a lightweight activity
+			
+		Implementing Multithreading in Java:
+			Since thread is an entity within a process, it is responsible for performing some task.
+			Whatever task the thread is going to perform, the relevant code is to be implemented within some class
+			which is referred as Thread Implementation Class.
+			
+			To create a Thread Implementation Class, Java provides 2 APIs from java.lang package:
+				1. Thread (class)
+				2. Runnable (Interface)
+			
+			The Thread Implementation Class can be created by 2 ways:
+				1. Extending Thread class
+				2. Implementing Runnable interface
+				
+		Life Cycle of Thread:
+			The life cycle of thread consists of 5 states:
+				1.	BORN
+				2. READY
+				3. RUNNING
+				4. BLOCKED
+				5. DEAD
+				
+			BORN:
+				When the thread is newly created, it is said to be in BORN state.
+			
+			READY:
+				When the thread is ready to run at any time, it is said to be in READY state
+				
+			RUNNING:
+				When the thread actually starts running, it is said to be in RUNNING state.
+				To acquire RUNNING state, the thread must be in the READY state.
+			
+			BLOCKED:
+				Under several circumstances, the running thread may enter into some BLOCKED state.
+				
+			DEAD:
+				When the thread is no longer available, it is said to be DEAD state.
+				
+		In multithreading, for single CPU, only one thread runs at a time; however it creates an impact as if multiple
+		threads running simultaneously.
+		
+		This is because of context switching algorithm implemented by OS specific entity known as Scheduler.
+		Scheduler is specific to OS responsible for scheduling the threads. Therefore the behaviour of multithreaded
+		programs is Platform Dependent.
+		
+		Typically a scheduler schedules the threads based upon their priority.
+		If threads have equal priority, then generally, the thread  which enters first in the READY state, gets scheduled
+		first.
+		
+		As soon as the thread acquires RUNNING state, its 'run()' method gets invoked. 
+		
+		At any time, the RUNNING thread can be sent into some BLOCKED state.
+		There are 4 possible types of BLOCKED state:
+			1. Waiting
+			2. Sleeping
+			3. BLOCKED
+			4. Suspended
+		
+		When this happens, scheduler checks for other thread's availability in the READY state. 
+		If found, schedules that thread and this way it continues till the end.
+		
+		When the thread completes its task, it acquires a DEAD state.  Once a thread is DEAD, it is no longer
+		available.
+		
+		While working with 'Runnable' interface, it is necessary to set 'Runnable' implementation as a target so that
+		the appropriate 'run()' method gets invoked.
+		Unless it is done, the default 'run()' method from 'Thread' class gets invoked which performs nothing.
+		
+		To set the target, the overloaded constructor of 'Thread' class is used which accepts a parameter of type
+		'Runnable'. 
+		
+		E.g.
+			Thread(Runnable)
+			
+		When to use which approach? 
+			   In case of 'Thread' extension, a single object of Thread Implementation Class is sufficient whereas in
+			   case of 'Runnable' implementation, 2 objects are required: 1 for Thread Implementation Class and the
+			   other for Thread class itself.
+			   
+			   This unnecessarily consumes more memory and therefore the 1st approach is better.
+			   
+			   But sometimes, the Thread Implementation Class may have to inherit from some other class as well and since
+			   Java does not support Multiple Inheritance, in this case, the Thread Implementation Class can be declared
+			   by implementing 'Runnable' interface.
+			   
+			   E.g.
+			   	public class MyWindow extends Window implements Runnable
+			   	
+		 Methods of 'Thread' class:
+		 
+		 'Thread' class provides several utility methods:
+		 	1. start():
+		 		It makes a request to the OS for the creation of the thread.
+		 		It brings the thread into READY state from BORN state.
+		 		It invokes the run() method.
+		 	
+		 	2. stop():
+		 		It forcefully kills the thread and sends it into DEAD state.
+		 		As a standard practice this approach is not recommended and therefore higher versions of Java have
+		 		marked this method as 'deprecated'.
+		 		
+		 	3. sleep():
+		 		It is a 'static' method which causes the currently running thread to enter into SLEEPING state.
+		 		The thread remains into the SLEEPING state until the time interval expires.
+		 	
+		 	4. yield():
+		 		It is a 'static' method that allows the currently running thread to give up the control to some other
+		 		thread.  The thread that yields the control, leaves the RUNNING state and goes back to READY state.
+		 		
+		 	5. suspend() and resume():
+				'suspend()' causes the thread to enter into the SUSPENDED state.		
+				The thread remains into the SUSPENCED state until it is resumed by calling 'resume()'.	 
+				Therefore both these methods are marked as 'deprecated'.
+				
+			6. currentThread():
+				It is a 'static' method that returns the handle to the currently running thread.		
+				
+			7. join():
+				Causes the parent thread to wait until the death of child thread on which it is invoked.
+		
+			
+			
+																													
+	
+		
+		
+		
+		
+		
+			
+			
+			

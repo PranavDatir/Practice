@@ -1,0 +1,198 @@
+Abstract Classes:
+	In Java, classes are divided into 2 types:
+		1. Concrete (Non-Abstract)
+		2. Abstract
+		
+		Sometimes there are situations where methods are required to be present within the base class but not being
+		implemented.
+		
+		To handle this, Java provides one facility of declaring the method rather than defining it.
+		When the method is declared and not defined, it is referred as abstract method.
+		
+		E.g.
+		class Shape {
+			void draw();
+		}
+		
+		In the above code fragment, method 'draw()' is declared and not defined; however the code fragment is invalid.
+		When the method is to be declared and not defined; Java enforces to use 'abstract' modifier for that method.
+		
+		E.g.
+		class Shape {
+			abstract void draw();
+		}
+		
+		The above code fragment seems OK from method declaration's perspective however it is still invalid.
+		When any method within a class is declared as 'abstract', Java enforces to declare the whole class as 'abstract'.
+		
+		E.g.
+		abstract class Shape {
+			abstract void draw();
+		}
+		
+		Finally, the above code fragment is valid.
+		
+		Once a class is declared 'abstract', it cannot be instantiated. In order to use that class further, it is to be
+		sub-classed (Creating a sub-class from that class).
+		
+		When a class is inherited from an abstract class, that subclass must implement all the abstract methods of that
+		abstract class; otherwise must be declared 'abstract'
+		
+		The 'abstract' modifier is not applicable for variables, constructors and static methods.
+		In Java, modifiers may appear in any order.
+		
+		Abstract classes may have concrete methods.
+		
+		TODO 4:
+		Create an abstract class CourseDataCalculator as per the following:
+		
+		public abstract class CourseDataCalculator {
+			public abstract float doCalculation(Course [] allCourses);		
+		}
+		
+		Create 2 subclasses of CourseDataCalculator with following functionalities:
+		(Subclass names are of your choice)
+		
+		SubClass 1: 
+			Returns the average duration of all courses
+		
+		Subclass 2:
+			Returns the average fees of all courses
+			
+		Write a main program to test the functionality.
+		
+	
+	Introducing 'final' :
+		It is a modifier provided by Java to make variables immutable.
+		
+		E.g.
+			final int x = 10;
+		The above statement makes variable 'x' as 'final'. Any attempt to modify its value results into compilation error.
+		'final' variables must be initialized.
+		
+		If a 'final' variable is a reference to some object, it is the reference that must stay the same and not the object.
+		
+		E.g.
+		final City c1 = new City("Pune"); 
+		c1.setName("Mumbai"); //OK
+		
+		c1 = new City("Mumbai"); //Error
+		
+		It is possible to declare methods as 'final' to prevent overriding.
+		If the method is declared as 'private'; it cannot be overridden. Therefore 'private' methods are implicitly 'final'.
+		
+		It is also possible to declare a class as 'final' to prevent inheritance.
+		Once a class is declared as 'final', its methods become implicitly 'final'.
+		
+		Modifiers 'abstract' and 'final' cannot appear together.
+		
+		----------------------------------------------------------------------------------------------
+		
+		Package:
+			Package is a collection of classes and other type declarations e.g. Interfaces, Annotations, Enums and so on.
+			
+			They are used to create a Java library isolated from other libraries.
+			They are also used to resolve naming conflicts.
+			
+		Creating a package:
+			Packages are created using 'package' statement.
+			
+			General Syntax:
+				package <package-name>;
+				<class-definition>
+				
+			Accessing Classes from Packages:
+				When classes belong to same package, they can access each other irrespective of whether they are 
+				declared 'public' or not.
+				
+				When classes belong to different packages, in order to access them, first they must be declared as
+				'public'.
+				
+				Once they are declared as 'public', they can be accessed by classes from different packages.
+				This is done using 'import' statement given by Java.
+				
+				E.g. 
+					import package_name.ClassName;
+				
+				To import all public declarations, '*' is used.
+				E.g.
+					import package_name.*;
+				
+				
+				How packages and classes are maintained?
+					Packages and classes are maintained in the form of folders and .class files respectively.
+					For every package, there is a separate folder created and for every class there is a separate .class file
+					created. The respective .class file is placed inside the relevant package specific folder.
+					
+				Sub Package:
+					It is also possible to create a package inside another package. It is called as a sub-package.
+					In order to access classes from sub-package, the name of super package is also required.
+					
+					E.g.
+						import super_package.sub_package.ClassName;
+				
+				Accessing Classes from Packages:
+					Java provides 2 ways to access classes from packages:
+						1. Using 'import'
+						2. Using Fully Qualified Name (Using Package Prefix)
+						
+				Default Package:
+					When a class is created without any package, by default it becomes a part of some package which is 
+					called as Default Package.
+					
+					Classes belonging to Default Package cannot be imported by the classes which belong to some explicit
+					package; and therefore the use of Default Package is discouraged.
+					
+				Access Modifiers Revisited:
+					Java provides 4 access modifiers:
+						1. private
+							Accessible only within the class
+						2. public
+							Accessible from anywhere
+						3. protected
+							Accessible within the entire package as well as outside the package if the class is a sub-class.
+						4. [default]
+							Accessible within the entire package and not accessible outside the package.
+							Therefore it is also called as Package-Level access modifier.
+				
+						
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		 
+		
+		
+		
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

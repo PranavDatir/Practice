@@ -1,0 +1,181 @@
+Core Java
+	Java is an Object Oriented Programming Language 
+	meant for developing real time business applications.
+
+	Types of Business Applications:
+		1. Desktop / Stand Alone
+		2. Simple N/W Based
+		3. Web Based
+		4. Mobile Based
+
+	Java mainly has 3 variants:
+		1. Java SE (Java Standard Edition)
+		2. Java EE (Java Enterprise Edition)
+		3. Java ME (Java Micro Edition) replaced with Android
+
+	Java Features:
+		1. Simple
+		2. Platform Independent
+		3. Secured
+		4. Robust
+		5. Portable
+		6. Multithreaded
+
+
+	First Java Program:
+		Development Environment Setup:
+			1. JDK (Java Development Kit)
+			A service pack consisting several tools to perform
+			following operations:
+				1. Compilation
+				2. Documentation
+				3. Archieving
+				4. Execution
+
+			2. Any text editor or some IDE (Preferred)
+
+
+	Java Program Compilation and Execution:
+		Once a source code is written within a .java file, it needs to be compiled using
+		a Java Compiler. It is done using javac.exe located within the JDK.
+
+		Once the compilation is done successfully, the program can be run using a file:
+		java.exe available in JDK.
+
+
+
+	Java Source File basic concepts / rules:
+	
+	1. If a class is declared as 'public', the file must have same name as that of class name.
+	2. If the class is not 'public', the file can be saved with any name.
+	3. It is possible to write multiple classes within a single source file provided up to 
+		maximum only 1 is 'public'. 
+	4. The .class file is created for every class. Therefore the count of .class file depends
+		upon the count of classes rather than the count of source files.
+
+
+
+	Java Versioning:
+		JDK 1 - Jan 1996
+		JDK 1.1
+		JDK 1.2
+
+
+		JDK 1.5 (JDK 5.0)
+		JDK 6
+		JDK 7
+		JDK 8 (LTS) - 2014
+		JDK 9
+		JDK 10 (Time Based Versioning)
+				(New Version every 6 months)
+		JDK 11 (LTS)
+	
+		...
+		JDK 17 (LTS)
+
+
+Classes In Java:
+	What is a Class?
+	
+	Class is a template that decides structure for an object.
+	The structure is defined with the help of fields / attributes / properties.
+
+	Once a class is created, it is further used by creating its object.
+	To create the object, Java provides 'new' operator.
+
+	Syntax:
+	<Class-Name>  <Ref-Var-Name> = new <Class-Name>();
+
+
+	Implementing Abstraction and Encapsulation:
+
+	The outer world should not be able to directly manipulate field values of the class object. 
+	To implement Abstraction and Encapsulation, first it is necessary to have Data Hiding.
+
+	It is possible using 'private' access modifier.
+
+	Once the access is restricted, to handle the functionality, methods are used.
+	Methods are considered as operations.
+
+
+	Data Types in Java:
+
+	Java is a strict typed language. Every variable, expression has a type.
+
+	There are mainly 4 categories of Data Types:
+
+	1. Integers
+		byte (1), short (2), int (4), long (8)	
+	2. Fractions
+		float (4), double (8)
+	3. Character
+		char (2)
+	4. Boolean
+		boolean (1 Bit)
+
+
+	More about types:
+	1. Java does not have unsigned integers.
+	2. Fractions are by default considered of type 'double'
+	3. Java follows UNICODE character set and not ASCII
+		Why? 
+			Java is meant for Internationalization (I18N)
+
+
+	Using Accessor and Mutator methods:
+	This is a pair of Getters and Setters used to work upon individual fields.
+	Typically, these methods follow a naming convention getXxx() and setXxx().
+
+	E.g.
+		For the field 'int employeeId' the methods will be as per the following:
+
+		int getEmployeeId() and void setEmployeeId(int)
+
+
+	
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

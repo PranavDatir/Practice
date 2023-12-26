@@ -1,0 +1,111 @@
+Using collection as a property:
+Depending upon the requirement, an entity class may have to declare a property of some collection type.
+This allows to handle associations in Java programming model.
+
+Generally, apart from getters and setters, these entity classes provide a utility method to add a new entry into
+the corresponding collection.
+
+Map:
+	Although List and Set are exactly opposite to each other, they have one similarity.
+	Both the collections are value-based collections i.e. 1-Dimensional
+	
+	Map is a collection that stores elements in the form of key-value pairs.
+	It is 2-Dimensional. Every element has a key and the corresponding value.
+	Key has to be unique whereas value can be duplicate.
+	Therefore the class of which objects are added as keys, must override equals() as well as hashCode() methods.
+	
+	Map is mainly having 3 implementations:
+		1. Hashtable
+		2. HashMap
+		3. Properties
+		
+		Hashtable is thread-safe by default. It does not accept 'null'.
+		HashMap is not thread-safe. It accepts one 'null' key and several 'null' values.
+		Properties is used to handle properties in the form of name-value pairs.
+		
+	TODO 10:
+		Create a class CourseDataCollection with following attribute:
+			private static Map<Integer, Course> allAvailableCourses.
+		
+		When this class is loaded, make a provision to instantiate this Map and put some values into it.
+		
+		Create a menu driven program that shows following menu to the user:
+			1. Add New Course
+			2. Find Course
+			3. Exit
+			
+		1. Add New Course:
+			This must accept Course information from user and add the entry into that Map.
+		2. Find Course
+			This must accept ID of the course and display the relevant Course details.
+			Display appropriate message if ID is not found.	
+		
+		The proram must be running continuously and gets terminated only when choice no. 3 is entered.
+		
+	Properties:
+		Sometimes an application needs some properties to be configured. Instead of programmatically configuring these
+		properties, it is better to configure them using some file. This brings flexibility and loose coupling.
+		
+		Generally these properties are configured in the form of name and value pairs separated by '=' as a delimiter.
+		Any file which contains name and value pairs in the above mentioned format, that file is referred as PROPERTIES
+		file.
+		
+		Java provides 'Properties' class to load the information from such files.
+	
+	Sorted Collections:
+		Since collections are meant for holding multiple values, many business applications have a frequent requirement
+		to perform sorting on these values.
+		
+		To accomplish this, Java provides 2 special types of collections:
+			SortedSet and SortedMap
+			
+		SortedSet:
+			It is an extension to Set.
+			It stores elements in sorted order.
+			It is implemented by TreeSet
+			
+		In general, when type safety is not a concern and not in use, all collections can hold objects of different types.
+		The exception to this is sorted collection. 
+		
+		Sorting User Defined Objects:
+			While performing sorting on predefined objects like String, Integer, Double, Float etc., sorted collection like
+			TreeSet can manage them because the relevant class already implements java.lang.Comparable interface.
+			
+			Any class which implements java.lang.Comparable, its objects can be sorted.
+			
+			Comparable:
+				It is an interface from 'java.lang' package and it is used to provide default sorting algorithm.
+				It provides a method known as 'compareTo()' to perform the comparison.
+				Based upon the result of this comparison, sorted collection may shuffle the sequence.
+				
+			Comparable is good enough to provide default sorting algorithm but if any further customization is required, 
+			it results into tight coupling.
+			
+			To address this problem, Java provides one more interface from java.util package:
+				Comparator
+				
+			It provides 'compare()' method to perform the comparison.
+			
+			To customize the sorting algorithm, it is necessary to create a separate class which implements this interface.
+			Once the class is created, any time its algorithm can be used by passing its object as a parameter to the 
+			constructor of 'TreeSet'.
+			
+			Just like SortedSet, there is SortedMap. It is an extension to Map. It holds elements in the form of
+			key-value pairs and the sorting happens on the basis of keys.
+			
+			If keys are user defined objects, it must be used along with either Comparable, or Comparator, or both.
+			
+			It is implemented by TreeMap.
+			
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -1,0 +1,17 @@
+package dac;
+
+import java.util.Collection;
+
+public class Crud_Main {
+	public static void showAll() {
+		DaoInterface<Info, Integer> idao = new InfoDao();
+		Collection<Info> allInfo = idao.getAll();
+		for(Info in : allInfo)
+			System.out.println(in);
+	}
+	
+	public static void main(String[] args) {
+		showAll();
+	}
+
+}

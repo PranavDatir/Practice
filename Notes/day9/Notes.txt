@@ -1,0 +1,209 @@
+Serialization:
+	The process of storing the state of an object to some permanent persistent store is called as Serialization.
+	Once the state has been serialized, at any time, it can be loaded back. It is known as de-serialization.
+	
+	To implement Serialization and De-serialization, Java provides relevant API from java.io package.
+	
+	It mainly consists of:
+		1. Serializable
+		2. ObjectOutputStream
+		3. ObjectInputStream
+		
+	Serializable:
+		It is an interface without any method and therefore it is called as a marker interface.
+		Any class which implements Serializable, its object can be serialized.
+		If the class does not implement this interface, at the time of serialization, an exception is raised:
+			NotSerializableException
+			
+	ObjectOutputStream:
+		It is a class that is responsible for performing serialization.
+		It makes use of OutputStream as a target.
+		It provides relevant 'void writeObject(Object)' method to actually perform serialization.
+		
+	ObjectInputStream
+		It is a class that is responsible for performing de-serialization.
+		It makes use of InputStream as a source.
+		It provides relevant 'Object readObject()' method to actually perform de-serialization.
+		
+		
+	Further Concepts:
+		Sometimes, the object may contain confidential information which is to be encrypted during serialization and
+		de-crypted during de-serialization.
+		
+		Serializable interface does not have any control over encryption and decryption because it is a marker interface.
+		It does not have any method.
+		
+		To handle this, Java provides one more interface: Externalizable
+			It is a sub-interface of Serializable..
+			It provides 2 methods:
+				writeExternal()
+				readExternal()
+			
+			Both the methods are CALLBACK methods. The 'writeExternal()' method gets called during serialization
+			whereas the 'readExternal()' method gets called during de-serialization.
+		
+		If a class of which an object is being serialized, contains a 'static' variable, its value does not get serialized.
+		During de-serialization, they are initialized with DEFAULT values.
+		
+		Sometimes, there might be a requirement to prevent serialization for non-static variables. This is possible by
+		declaring that variable as 'transient'
+		
+		Any variable which is declared as 'transient', its value does not get serialized. During de-serialization, it gets
+		initialized with DEFAUlT value.
+		
+	TODO 9:
+		Write a program that accepts input from user about the number of courses for which the data to be entered.
+		According to that build an array of Course objects with that dimension.
+		
+		Fill the array with Course objects where the information is accepted from user.
+		
+		Serialize the whole array into some file.
+		
+		Write another program to perform de-serialization and display all the course details.
+		
+	----------------------------------------------------------------------------------------------------------------
+	
+	Collection Framework:
+		What is Collection?
+			Collection is a data structure responsible for holding several data elements in the form of objects.
+			It mainly provides 3 functionalities:
+				1. ADD
+				2. RETRIEVE
+				3. REMOVE
+			
+			How Collection is different from Array?
+				1. Array has fixed dimension where Collection grows dynamically.
+				2. Array can hold primitives as well as objects where Collection holds only objects.
+				3. Array holds similar typed elements whereas Collection can hold objects of different types.
+			
+			Java provides wide range of Collections through an API which belongs to java.util package.
+			
+			Legacy Classes:
+				1. Stack
+				2. Vector
+				3. Dictionary
+				4. Hashtable
+				5. Properties
+				
+			Stack:
+				It implements LIFO algorithm.
+				It has a single end and it provided several functionalities like : push(), pop(), peek() etc.
+				pop() and peek() both return the last value but pop() performs removal and peek() does not.
+			
+			Vector
+				Every collection has 2 properties:
+					1. Size
+						It indicates the number of elements present in that collection.
+						It can be obtained using size() method
+					2. Capacity
+						It indicates the number of elements the collection can hold.
+						It can be obtained using capacity() method
+			
+			Exploring other Collection specific classes:			
+			ArrayList:
+				Like Vector, ArrayList handles the same operations.
+				The only difference between Vector and ArrayList is:
+					Vector is by default Thread-Safe and ArrayList is not.
+					
+			LinkedList:
+				Just like ArrayList, it handles same functionality with additional behaviour:
+					It implements the algorithm of Double Ended Queue (Deque)
+					This allows to perform operations from both ends: Top and Bottom			
+					It provides several methods:
+						addFirst()
+						getFirst()
+						addLast()
+						getLast()
+						removeFirst()
+						removeLast()	
+						
+	Java's Collection Framework:
+		The Collection Framework of Java is designed using several predefined interfaces.
+		Every interface has some contract (Specification or set of rules).
+		
+		Collection:
+			It is the super interface and it has direct 2 sub-interfaces:
+				1. List
+				2. Set
+		
+		List:
+			It is an interface that has following contract:
+				1. The collection is ordered (Index Based)
+				2. Duplicate values are accepted.
+				
+			Classes like Stack, Vector, ArrayList, LinkedList are the implementations of List
+			
+		Set:
+			Sometimes, there might be a requirement where order is not important but uniqueness is important.
+			This is made possible using 'Set' interface.
+			It is an interface having following contract:
+				1. The collection is unordered (Hash Based)
+				2. Duplicate values are prevented.
+			
+			It is implemented by HashSet.
+		
+		Type Safe Collection:
+			In general, a collection can hold objects of different types. Sometimes, it may require to have a collection
+			holding objects of same specific type only.
+			
+			Such a collection is called as Type-Safe Collection.
+			This feature is introduced by Java version 5 with the help of generic classes and interfaces.
+			E.g.
+				class TestClass<T> {
+					void doTest(T t){
+					
+					}
+				}
+				
+				interface TestInterface<T> {
+					void doTest(T t);
+				}
+				
+			When a collection is declared as type-safe, any attempt to add an object other than that type results into
+			compilation error.
+			It allows to perform type checking at compilation time itself, getting rid of exception.
+			Since compiler is already aware about the type, there is no explicit cast required.
+			
+			HashSet:
+				Since it is a Set implementation which prevents duplicate values, in order to acquire the appropriate 
+				behaviour, the corresponding class of which objects are being added into HashSet, must override
+				'equals()' method.
+				
+				Since HashSet is a hash based collection, the corresponding class of which objects are being added 
+				into HashSet, must override 'hashCode()' method also.
+				
+				hashCode() method:
+					It is a method that belongs to Object class. It provides hashing algorithm.
+					The owner of the class decides this algorithm or may rely upon the auto-generated one from some IDE.
+					
+					The method returns 'int' which indicate hash value of the object. This hash value is used by Hash based
+					collections to store the elements..
+					
+				When any new entry is being added in a hash based collection, its hash value is calculated based upon the
+				hashCode() implementation.
+				
+				If that hash value is not available, the corresponding entry is stored by creating a new container known
+				as hash bucket otherwise the same bucket is used.
+				
+				In case of same bucket, if there is already some object available, it is compared with the new entry for
+				equality using equals(). Based upon the comparison, the entry is either accepted or rejected.
+				
+				If 2 objects are equal, definitely their hash codes are equal.
+				If 2 objects are unequal, still they may have same hash code.
+			
+		
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+
+	

@@ -1,0 +1,160 @@
+Garbage Collection:
+	It is a mechanism implied by Java Runtime Environment and it is responsible for de-allocating the memory
+	for the unused objects.
+	
+	E.g.
+	Employee emp = new Employee();
+	Employee emp2 = emp;
+	Employee emp3 = emp;
+	
+	At the end of the last statement, the Employee object has 3 references and this is monitored by JRE.
+	It is called as Reference Count.
+	
+	E.g. 
+	The Employee object as a Reference Count: 3
+	
+	emp2 = new Employee();
+	emp = emp2;
+	emp3 = null;
+	
+	In the above code fragment, after the last statement, the 1st Employee object does not have any reference
+	i.e. its Reference Count is 0.
+	
+	As soon as the Reference Count becomes 0, that object is marked as UNUSED.
+	
+	Java Runtime has a background process known as Garbage Collector (GC). When it runs, it identifies the objects
+	which are marked as UNUSED and starts de-allocating memory for them.
+	
+	Circumstances under which the object becomes UNUSED:
+	1. Creating an object within some method
+		E.g.
+			public void createObject(){
+				Employee emp = new Employee();
+			}
+		As soon as the control exits from the method, the object becomes UNUSED
+		
+	2. Explicitly nullifying the reference
+		E.g.
+			Employee emp = new Employee();
+			emp = null;
+			
+	3.  Creating an object without any reference
+		E.g.
+			new Employee(101, "Tim", 23000);
+
+------------------------------------------------------------------------------------------------------
+
+Inheritance:
+	It is the process of creating new classes based based upon the existing class by inheriting its properties.
+	The class from which new classes are created is referred as Base / Parent / Super class whereas the newly
+	created classes are referred as Derived / Child / Sub classes.
+	
+	Inheritance represents IS-A relationship.
+	
+	Java supports 3 types of inheritance:
+		1. Simple / Single
+		2. Multilevel
+		3. Hierarchical
+	
+	Unlike C++, Java does not support Multiple and Hybrid inheritance.
+	Inheritance in Java is always 'public'
+	
+	Inheritance is implemented using 'extends' keyword.
+	
+	Constructors in Inheritance:
+		Constructors in inherited classes are invoked from bottom to top but executed from top to bottom.
+		In case of parameterized constructors, sub-classes have to decide which parameterized constructor from
+		super class is to be invoked.
+		
+		To handle this, Java provides 'super' keyword. It refers to immediate super class.
+		
+		'super' if used, must be the first statement within the constructor otherwise compiler gives error.
+		If not used, then the no-argument constructor of the base class gets invoked.
+		
+	Method Overriding:
+		When methods with same name, same signature and same return type defined within inherited classes then
+		they are called as overridden methods.
+		
+		Why to override the method?
+			It is used to modify the behaviour of the existing method to adopt new situation. 
+			Overriding is directly related to  sub-classing. Therefore inheritance is a prerequisite for method overriding.
+			
+			The signature of the overridden method must be same otherwise it results into method overloading.
+			To avoid such problem, it is better to get it approved from compiler whether it is correct way of overriding
+			or not.
+			
+			It is done using @Override annotation. It is applied at the method level.
+			
+			Method overloading is an example of static (Compile Time) polymorphism.
+			Method overriding is an example of dynamic (Runtime) polymorphism. 
+			
+			Every reference declared in Java has 2 types:
+				Static and Dynamic
+				
+				Static type appears on the left side whereas Dynamic type appears on the right side just after 'new'.
+				When classes represent IS-A relationship, it is possible to declare a reference of base class type that
+				refers to an object of derived class type.
+				
+				E.g.
+					Base b = new Derived();
+				
+				In such scenario, when the method is invoked using the reference, at runtime always Dynamic Type of the
+				reference is taken into consideration.
+				
+				E.g.
+					Base b = new Derived();
+					b.myMethod();
+				
+				In the above code fragment, assuming that 'myMethod()' is an overridden method, since the dynamic type
+				of reference 'b' is 'Derived', the method 'myMethod' gets invoked from 'Derived' class.
+				
+				If the method is not found in Derived class, then the method from Base class gets called.
+				
+				Sibling classes are not compatible with each other.
+				E.g.
+					Derived d = new AnotherDerived();
+				
+				The above fragment is invalid.
+				
+				While working with polymorphic approach for object creation, using the Base class reference, it is possible
+				to call the methods only when they are available in the Base class.
+				
+				In such cases an explicit cast is required.
+				
+				Using 'super' in Method Overriding:
+					Method Overriding can be used for:
+						1. Replacement
+						2. Extension
+							In order to handle extension, it is necessary to call the Base class method from the Derived class
+							overridden method.
+							
+							It is done using super.methodName() format.
+				
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+	
+.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

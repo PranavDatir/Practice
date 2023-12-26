@@ -1,0 +1,282 @@
+Exception Handling:
+	In Java, errors are mainly divided into 2 types:
+		1. Compile Time
+		2. Runtime
+	
+	Compile Time Errors:
+		These are the errors which are identified by compiler and therefore they get generated when the program 
+		compiles.
+			E.g.
+				Using a class name where the class does not exist.
+				Syntax Errors: Missing semicolon, brackets mismatch etc.
+	
+	Runtime Errors:
+		These are the errors which are not identified by compiler; rather they occur during program's execution.
+		Such errors are called as exceptions.
+		
+	The process of identifying these runtime errors (exceptions) and taking necessary action against that is called
+	as Exception Handling. 
+	
+	Exception Handling in Java:
+		Exception Handling in Java is implemented using object oriented approach.
+		Exceptions are the actual objects. These objects typically contain error information.
+	
+	Handling Exceptions in Java:
+		In order to handle exceptions, Java provides mainly 2 keywords: 'try' and 'catch'
+		'try' is used to create a block of statements which are probable to fire an exception.
+		'catch' is used to create a block of statements which is used as an exception handler.
+		
+		E.g.
+			try {
+				Statement 1
+				Statement 2
+				...
+			}
+			catch(ExceptionType ref){
+				Statement 1
+				Statement 2
+				....
+			}
+			
+	How exceptions are raised?
+		Exceptions are raised by JRE because exceptions are Runtime Errors.
+		JRE identifies the abnormal situation and maps the same to the corresponding exception specific class.
+		
+		E.g.
+			Abnormal Situation																Exception Class
+			
+			Index Out of Bounds															ArrayIndexOutOfBoundsException
+			Divide by Zero																		ArithmeticException
+		
+		Once the class is identified, JRE creates an object that class.
+		Then it searches for an exception handler for that particular exception provided that the relevant statement
+		which has fired that exception is enclosed within a 'try' block. 
+		If all these conditions are fulfilled, JRE invokes the relevant 'catch' block and passes the exception specific
+		object as a parameter.
+	
+		Exception Hierarchy:
+			The topmost class in Exception Hierarchy is java.lang.Throwable.
+			It is inherited by 2 sub-classes: Error and Exception
+			
+			Error:
+				It is generated due to resource exhaustion in JVM.
+				E.g. Stack Overflow, Out ofMemory
+				It is not under the control of a developer.
+				It is rare but usually fatal.
+				
+				E.g.
+					StackOverflowError
+					OutOfMemoryError
+			
+			Exception:
+				It is under the control of a developer.
+				It is frequent but not fatal.
+			
+	Exception Types:
+		Exceptions are divided into 2 types:
+			1. Runtime Exceptions (UNCHECKED)
+			2. CHECKED
+		
+		Runtime Exceptions (UNCHECKED):
+			These are the exceptions for which compiler does not enforce to handle them.
+			Any classes descended from RuntimeException class, are referred as Runtime Exceptions (UNCHECKED).
+			Since no checking is done by compiler, they are also known as UNCHECKED exceptions.
+			
+			E.g.
+				ArrayIndexOutOfBoundsException
+				NullPointerException
+				ArithmeticException
+		
+		CHECKED Exceptions:
+			These are the exceptions for which compiler enforces to handle them.
+			Any classes which are not descended from RuntimeException class, are referred as CHECKED Exceptions.	
+	
+	Handling Multiple Exceptions:
+		A same block of statements may fire different types of exceptions. It is possible to handle multiple exceptions.
+		It is done by providing multiple 'catch' blocks for a single 'try' block.
+		
+		E.g.
+			try {
+				Statement 1
+				Statement 2
+				Statement 3
+				....
+			}
+			catch(Ex1 ex){
+				statements
+			}
+			catch(Ex2 ex){
+				statements
+			}
+			....
+			
+	Handling a Default Exception:
+		Sometimes, a block of statements may fire some exception about which developer did not make any prediction.
+		In this case, in reality, if that exception is raised, again the system message (Technical) gets displayed.
+		This problem can be resolved by providing a Default Exception Handler.
+		
+		It is done by providing a 'catch' block that can handle any type of exception.
+		For this, the super class of all exception classes is to be used: Exception
+		
+		E.g.
+			catch(Exception ex){
+				Statements
+			} 
+	
+		Rule about Multiple 'catch' blocks:
+			If the exception specific classes used within 'catch' blocks represent IS-A relationship, then the 'catch'
+			block of Subclass type must appear before the 'catch' block of Super class type. 
+			
+			If IS-A Relationship is not there, then the 'catch' blocks can appear in any order.
+		
+		Difference between Method Invocation and Exception:
+			In case of method invocation, the control is returned back to the calling program.
+			In case of exception, the control is not returned back to the calling program.
+		
+		But sometimes, it is necessary to execute some statements irrespective of whether the exception is raised or
+		not.
+		Neither 'try' nor 'catch' block gives guarantee about statement's execution.
+		It is given by 'finally' block.
+		
+		It gets called irrespective of whether the exception is raised or not.
+		E.g.
+			finally {
+				Statements
+			}
+		
+		When 'finally' block creates an impact?
+			The 'finally' block creates an impact especially for the methods having a return type other than 'void'.
+		
+		Rules about try-catch-finally:
+			1. The blocks must appear one  after the other without any statement in between.
+			2. The 'try' block must be used in conjunction with 'catch' or 'finally' or both.
+			3. 'catch' cannot appear without 'try'
+			4. 'finally' cannot appear without 'try'
+			5. The order must be: try --> catch --> finally
+		
+		It is also possible to have nesting of these blocks.
+		
+		E.g.
+			try {
+				....
+				....
+				try {
+					.....
+					....
+				}
+				catch(...){
+					...
+				}
+			}
+			catch(...){
+				...
+			}
+			*** Variables declared within these blocks become local variables to these blocks.
+			
+	Java provides 2 utility keywords regarding Exception Handling:
+		1. throws
+		2. throw
+		
+	'throws':
+		It is used by method or constructor definitions to indicate that their code may fire some exception; but they
+		are not willing to handle it rather their calling program must handle it.
+		(This is applicable for CHECKED exceptions and not for Runtime (UNCHECKED) exceptions)
+		
+		E.g.
+			public void printFileData(String fileName){
+				//Code to open the file for reading and printing its contents.
+			}
+		
+		In the above fragment, the code inside the method 'printFileData()' may fire FileNotFoundException if
+		the file does not exist.
+		
+		It is a CHECKED exception and hence compiler enforces to handle it. Therefore the above fragment is invalid 
+		because there is no exception handler available (try and catch are not present).
+		
+		To rectify compilation problem, there are 2 alternatives:
+			1. Add 'try-catch'
+			2 Use 'throws'. 
+		
+		Using 'throws':
+			public void printFileData(String fileName) throws FileNotFoundException{
+				//Code to open the file for reading and printing its contents.
+			}
+		
+		The above fragment tells the compiler that the method may throw FileNotFoundException but not willing to
+		handle it. This enforces the calling program to handle that exception.
+		
+		When a method adds 'throws' declaration, it enforces its caller to handle the exception.
+		In order to compile the code successfully, the caller has 2 options:
+			1. Handle the exception using try -- catch.
+			2. Further delegate the responsibility to its caller by using 'throws'
+	
+	As long as regular methods are concerned, depending upon the requirement, any of the above options might
+	be used.
+	
+	In case of main() method, adding 'throws' declaration is highly discouraged. Therefore, generally main() contains
+	try-catch constructs. 
+	
+	'throw':
+		Sometimes, instead of waiting for JRE to raise an exception, it might be required to raise it explicitly. 	
+		This is accomplished using 'throw'.
+		
+		General Syntax:
+			throw <Throwable>
+		
+	User Defined Exceptions:
+		Sometimes, depending upon domain requirement, it is necessary to create our own exceptions and raise them.
+		Such exceptions are known as User Defined exceptions.
+
+		In case of User Defined exceptions, it is necessary to create a class which is referred as exception specific
+		class.
+		
+		This class will be considered as exception specific class only when it inherits some predefined exception 
+		specific class.
+				
+		Depending upon the requirement (CHECKED or UNCHECKED), the name of the super class is decided.
+		
+		E.g.
+			In case of CHECKED exception, the user defined class must inherit Exception
+			In case of UNCHECKED exception, the user defined class must inherit RuntimeException
+			
+		What is printStackTrace()?
+			It is a method used to display the complete trace of exception when it gets raised.
+			It involves all the trace points:Origin, propagation and so on. 
+			
+			It is used when the project is in the DEVELOPMENT phase. In PRODUCTION phase, it must not be used.
+			It is used by developers for troubleshooting.
+			
+		TODO 6:
+			Create a class CourseCollection as per the following:
+				private static Course[] availableCourses
+			
+			When this class is loaded, the static array must be filled with some Course objects.
+			(Hint: Make use of 'static' block)
+			
+				Provide a method:
+						public static void printCourseNames(String provider) throws ProviderNotFoundException
+				
+				The method must display names of the courses offered by the provider.
+				The method must throw ProviderNotFoundException if the supplied provider name is invalid.
+				
+				***ProviderNotFoundException must be a CHECKED exception.
+				
+				Write a main program to test this functionality.
+				
+				****Display appropriate message if the provider is invalid.
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

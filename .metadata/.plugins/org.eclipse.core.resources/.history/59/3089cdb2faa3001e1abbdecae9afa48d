@@ -1,0 +1,44 @@
+package dac;
+
+import java.util.Collection;
+
+public class Crud_Main {
+	public static void showAll() {
+		DaoInterface<Info, Integer> idao = new InfoDao();
+		Collection<Info> allInfo = idao.getAll();
+		for(Info in : allInfo)
+			System.out.println(in);
+	}
+	
+	public static void showOne() {
+		DaoInterface<Info, Integer> idao = new InfoDao();
+		Info in = idao.getOne(3);
+		if(in != null)
+			System.out.println(in);
+		else
+			System.out.println("No Info");
+	}
+	public static void create() {
+		DaoInterface<Info, Integer> idao = new InfoDao();
+		Info in = new Info("2","erty", 78946513);
+		idao.create(in);
+	}
+	public static void update() {
+		DaoInterface<Info, Integer> idao = new InfoDao();
+		Info currentInfo = idao.getOne(1);
+		currentInfo.setName("xcvb");
+		idao.update(currentInfo);
+	}
+	public static void delete() {
+		DaoInterface<Info, Integer> idao = new InfoDao();
+		idao.getOne(4);	
+	}
+	public static void main(String[] args) {
+		//showAll();
+		//showOne();
+		//create();
+		//update();
+		delete();
+	}
+
+}
